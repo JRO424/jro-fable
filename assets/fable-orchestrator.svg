@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 620" width="1300" height="620">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#00000018"/>
+    </filter>
+    <linearGradient id="fableGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF7A1A"/>
+      <stop offset="100%" stop-color="#E85D00"/>
+    </linearGradient>
+    <linearGradient id="outputGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF7F0"/>
+      <stop offset="100%" stop-color="#FFE8D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1300" height="620" fill="#FAFAFA" rx="16"/>
+
+  <!-- Title -->
+  <text x="650" y="46" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A">JRO-Fable: Fable orchestrates. Lighter agents gather signal.</text>
+
+  <!-- ═══ TOP ROW ═══ -->
+
+  <!-- Goal box -->
+  <rect x="70" y="90" width="250" height="130" rx="12" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="2" filter="url(#shadow)"/>
+  <text x="195" y="132" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#525252">User goal</text>
+  <text x="195" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#737373">repo context</text>
+  <text x="195" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#737373">constraints</text>
+
+  <!-- Fable box (HERO - Tiger Orange) -->
+  <rect x="430" y="75" width="380" height="160" rx="14" fill="url(#fableGrad)" stroke="#CC4E00" stroke-width="3" filter="url(#shadow)"/>
+  <text x="620" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="800" fill="#FFFFFF">Claude Fable</text>
+  <text x="620" y="155" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#FFF0E0">orchestrator + judge</text>
+  <text x="620" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#FFD4A8">plan  ·  tradeoffs  ·  synthesis</text>
+  <!-- Cost badge -->
+  <rect x="710" y="196" width="90" height="26" rx="13" fill="#FFFFFF30"/>
+  <text x="755" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">$10 / $50</text>
+
+  <!-- Output box -->
+  <rect x="920" y="90" width="310" height="130" rx="12" fill="url(#outputGrad)" stroke="#FC6A03" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1075" y="132" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#9A3800">Integrated result</text>
+  <text x="1075" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#B35400">final review</text>
+  <text x="1075" y="182" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#B35400">user answer + next action</text>
+
+  <!-- ═══ ARROWS: Goal → Fable → Output ═══ -->
+  <line x1="320" y1="155" x2="425" y2="155" stroke="#FC6A03" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+  <line x1="810" y1="155" x2="915" y2="155" stroke="#FC6A03" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FC6A03"/>
+    </marker>
+    <marker id="arrowReturn" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#FC6A03" opacity="0.5"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ DELEGATE ARROWS (Fable → agents) ═══ -->
+  <line x1="510" y1="235" x2="260" y2="385" stroke="#FC6A03" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="620" y1="235" x2="620" y2="385" stroke="#FC6A03" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="730" y1="235" x2="1020" y2="385" stroke="#FC6A03" stroke-width="2" marker-end="url(#arrowOrange)"/>
+
+  <!-- Delegate labels on arrows -->
+  <text x="365" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FC6A03" font-weight="600" transform="rotate(-30 365 300)">delegate</text>
+  <text x="636" y="310" text-anchor="start" font-family="system-ui, sans-serif" font-size="12" fill="#FC6A03" font-weight="600">delegate</text>
+  <text x="890" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FC6A03" font-weight="600" transform="rotate(30 890 300)">delegate</text>
+
+  <!-- ═══ RETURN ARROWS (agents → Fable) ═══ -->
+  <line x1="310" y1="395" x2="540" y2="245" stroke="#FC6A03" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.45" marker-end="url(#arrowReturn)"/>
+  <line x1="660" y1="395" x2="660" y2="245" stroke="#FC6A03" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.45" marker-end="url(#arrowReturn)"/>
+  <line x1="960" y1="395" x2="740" y2="245" stroke="#FC6A03" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.45" marker-end="url(#arrowReturn)"/>
+
+  <!-- ═══ BOTTOM ROW (Subagent boxes) ═══ -->
+
+  <!-- Research box -->
+  <rect x="70" y="395" width="300" height="145" rx="12" fill="#FFFFFF" stroke="#FCA95C" stroke-width="1.5" stroke-dasharray="8,4" filter="url(#shadow)"/>
+  <rect x="82" y="405" width="92" height="24" rx="12" fill="#FFF0E0"/>
+  <text x="128" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#CC4E00">SCOUT</text>
+  <text x="220" y="443" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1A1A1A">Research scans</text>
+  <text x="220" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">docs, APIs, repo map</text>
+  <text x="220" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">grep, inventory, logs</text>
+  <rect x="82" y="508" width="72" height="22" rx="11" fill="#F0FFF0"/>
+  <text x="118" y="523" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2D8A2D">Haiku $1/$5</text>
+
+  <!-- Coding box -->
+  <rect x="430" y="395" width="380" height="145" rx="12" fill="#FFFFFF" stroke="#FCA95C" stroke-width="1.5" stroke-dasharray="8,4" filter="url(#shadow)"/>
+  <rect x="442" y="405" width="92" height="24" rx="12" fill="#FFF0E0"/>
+  <text x="488" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#CC4E00">BUILDER</text>
+  <text x="620" y="443" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1A1A1A">Bounded coding</text>
+  <text x="620" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">patches, refactors, edits</text>
+  <text x="620" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">tests, implementations</text>
+  <rect x="442" y="508" width="92" height="22" rx="11" fill="#FFF8E0"/>
+  <text x="488" y="523" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#996B00">Sonnet $3/$15</text>
+
+  <!-- Testing box -->
+  <rect x="870" y="395" width="360" height="145" rx="12" fill="#FFFFFF" stroke="#FCA95C" stroke-width="1.5" stroke-dasharray="8,4" filter="url(#shadow)"/>
+  <rect x="882" y="405" width="92" height="24" rx="12" fill="#FFF0E0"/>
+  <text x="928" y="422" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#CC4E00">TESTER</text>
+  <text x="1050" y="443" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#1A1A1A">Testing passes</text>
+  <text x="1050" y="468" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">scripts, browser, logs</text>
+  <text x="1050" y="492" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#737373">screenshots, validation</text>
+  <rect x="882" y="508" width="92" height="22" rx="11" fill="#FFF8E0"/>
+  <text x="928" y="523" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#996B00">Sonnet $3/$15</text>
+
+  <!-- ═══ FOOTER ═══ -->
+  <text x="650" y="582" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#A3A3A3">Solid arrows = delegate work  ·  Dashed arrows = report evidence back  ·  Up to 76% cost savings</text>
+  <text x="650" y="604" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#C4C4C4">JRO-Fable by Jon Orozco</text>
+</svg>
