@@ -1,6 +1,6 @@
 # JRO-Fable
 
-**A Claude Code skill that makes Fable 5 up to 76% cheaper by routing token-heavy work to lighter subagents — while keeping Fable's judgment where it counts.**
+**A Claude Code skill that cuts the cost of your most expensive model by routing token-heavy work to lighter ones — while keeping apex-tier judgment where it counts. The apex seat binds to the most capable model you can call: Fable 5 (GA again 2026-07-01) in subscription Claude Code and for frontier-hard work; Opus 4.8 as the metered-API default.**
 
 Created by [Jon Orozco](https://github.com/JRO424)
 
@@ -14,13 +14,13 @@ Created by [Jon Orozco](https://github.com/JRO424)
 
 ## The Problem
 
-Claude Fable 5 is the most capable model in the Claude family — and the most expensive at **$10/$50 per million tokens** (input/output). That's 3.3x Sonnet and 10x Haiku.
+The **apex tier** is the most capable — and most expensive — model you can call. That's **Fable 5** ($10/$50 per million tokens, redeployed 2026-07-01) with **Opus 4.8** ($5/$25) as the metered-API default seat. Either way it costs far more than Sonnet 5 ($3/$15, intro $2/$10 through 26-0831) or Haiku ($1/$5).
 
 Most real-world tasks aren't pure reasoning. They're a mix of grunt work (scanning repos, reading logs, running tests, making bounded edits) and judgment calls (architecture decisions, conflict resolution, risk assessment). Without orchestration, Fable spends premium tokens on work that cheaper models handle just as well.
 
 ## The Solution
 
-JRO-Fable turns Fable into an **orchestrator** — a tech lead who delegates the legwork and focuses on the decisions that actually need Fable-tier intelligence.
+JRO-Fable turns the apex model into an **orchestrator** — a tech lead who delegates the legwork and focuses on the decisions that actually need apex-tier intelligence.
 
 ### Three-Tier Model Routing
 
@@ -28,7 +28,7 @@ JRO-Fable turns Fable into an **orchestrator** — a tech lead who delegates the
 |---|---|---|
 | File search, grep, log scanning, inventory | **Haiku** ($1/$5) | Pattern matching — no reasoning needed. 10x cheaper. |
 | Bounded edits, test execution, code review | **Sonnet** ($3/$15) | Strong code generation at 3.3x cheaper. |
-| Architecture, synthesis, conflict resolution, final review | **Fable** (self) | This is what you're paying for. |
+| Architecture, synthesis, conflict resolution, final review | **Apex — Opus 4.8** (self) | This is what you're paying for. |
 
 ### Four Named Delegation Presets
 
@@ -45,9 +45,11 @@ Real numbers from a typical 10-call research workflow:
 
 | Setup | Cost | Savings |
 |---|---|---|
-| All Fable | $0.55 | — |
-| Fable orchestrator + Sonnet subagents | $0.24 | **57%** |
-| Fable orchestrator + Haiku subagents | $0.13 | **76%** |
+| All apex (Opus 4.8) | ~$0.21 | — |
+| Apex orchestrator + Sonnet workers | ~$0.10 | **~55%** |
+| Apex orchestrator + Haiku workers | ~$0.04 | **~80%** |
+
+*Illustrative (10 calls, 2K in + 500 out each); `lib/pricing.json` is authoritative and the numbers scale with whatever the apex tier binds to.*
 
 Prompt caching (0.1x read price after first call) compounds these savings further.
 
@@ -88,7 +90,7 @@ When the user types `/jro-fable`, invoke the Skill tool with `skill: "jro-fable"
 
 ## Usage
 
-In Claude Code, running on Fable 5:
+In Claude Code, running on your apex model (Fable 5 / Opus 4.8):
 
 ```
 /jro-fable
@@ -108,7 +110,7 @@ Or just start a token-heavy task — the skill auto-triggers on phrases like:
 
 ## Requirements
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with access to Claude Fable 5
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with access to a flagship model for the apex tier (Fable 5 / Opus 4.8)
 - The `Agent` tool (built into Claude Code) for spawning subagents
 - Optional: the `Workflow` tool for multi-stage orchestration with 3+ agents
 

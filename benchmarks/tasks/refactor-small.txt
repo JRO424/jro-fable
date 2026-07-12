@@ -1,0 +1,25 @@
+task_id: refactor-small
+task_type: edit
+expected_shape: returns syntactically valid Python; fixes the off-by-one bug in the loop slice; applies clean PEP-8 naming throughout; removes the unused variable; eliminates the redundant type cast; preserves the function's input/output contract; no explanation prose, just the refactored function
+
+Refactor the Python function below. Fix the bug, clean up naming, and resolve the style issues. Return ONLY the refactored function — no explanation, no markdown fences, just the raw Python code.
+
+Issues to address:
+1. BUG: the loop slice is off by one — it skips the last element.
+2. STYLE: function and variable names are cryptic (single letters, abbreviations).
+3. STYLE: there is an unused variable that is assigned but never read.
+4. STYLE: there is a redundant explicit type cast that Python handles implicitly.
+5. Preserve the function's contract: takes a list of numbers, returns the running average after each element as a list of floats.
+
+--- FUNCTION ---
+def calc_ra(nums):
+    res = []
+    ttl = 0
+    unused_ctr = 0
+    n = len(nums)
+    for i in range(0, n - 1):   # BUG: should be range(0, n)
+        ttl = ttl + float(nums[i])
+        avg = float(ttl) / float(i + 1)   # redundant float() on ttl already float
+        res.append(avg)
+    return res
+--- END FUNCTION ---

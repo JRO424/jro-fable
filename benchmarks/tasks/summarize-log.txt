@@ -1,0 +1,82 @@
+task_id: summarize-log
+task_type: summarize
+expected_shape: exactly 5 bullets; each bullet is one concise sentence; covers the two latency-spike incidents and the auth-failure burst; no raw log lines in the output
+
+Read the following web server access log and write a 5-bullet incident summary. Each bullet must be a single concise sentence. Cover the two latency-spike incidents, the auth-failure burst, and any other notable patterns. Do not include raw log lines in the output.
+
+--- BEGIN LOG ---
+192.168.1.10 - - [14/Jun/2026:08:01:03 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 12
+192.168.1.12 - - [14/Jun/2026:08:01:07 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 84
+10.0.0.5 - alice [14/Jun/2026:08:01:15 +0000] "POST /api/v1/login HTTP/1.1" 200 256 "-" "curl/7.79" 43
+10.0.0.7 - bob [14/Jun/2026:08:01:22 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 97
+192.168.1.14 - - [14/Jun/2026:08:02:01 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.9 - carol [14/Jun/2026:08:02:14 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 145
+10.0.0.11 - dave [14/Jun/2026:08:02:33 +0000] "PUT /api/v1/orders/882 HTTP/1.1" 200 340 "-" "Mozilla/5.0" 62
+192.168.1.16 - - [14/Jun/2026:08:03:01 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 10
+10.0.0.5 - alice [14/Jun/2026:08:03:18 +0000] "GET /api/v1/reports/2026-06 HTTP/1.1" 200 98234 "-" "Mozilla/5.0" 4821
+10.0.0.5 - alice [14/Jun/2026:08:03:19 +0000] "GET /api/v1/reports/2026-05 HTTP/1.1" 200 97010 "-" "Mozilla/5.0" 5003
+10.0.0.5 - alice [14/Jun/2026:08:03:20 +0000] "GET /api/v1/reports/2026-04 HTTP/1.1" 200 96541 "-" "Mozilla/5.0" 4998
+10.0.0.7 - bob [14/Jun/2026:08:03:45 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 88
+192.168.1.10 - - [14/Jun/2026:08:04:01 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 12
+10.0.0.13 - eve [14/Jun/2026:08:04:22 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 139
+10.0.0.15 - frank [14/Jun/2026:08:04:44 +0000] "POST /api/v1/orders HTTP/1.1" 201 890 "-" "Mozilla/5.0" 77
+10.0.0.17 - grace [14/Jun/2026:08:05:01 +0000] "DELETE /api/v1/orders/445 HTTP/1.1" 204 0 "-" "Mozilla/5.0" 55
+192.168.1.12 - - [14/Jun/2026:08:05:03 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.19 - - [14/Jun/2026:08:05:41 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 18
+10.0.0.19 - - [14/Jun/2026:08:05:42 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 17
+10.0.0.19 - - [14/Jun/2026:08:05:43 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 19
+10.0.0.19 - - [14/Jun/2026:08:05:44 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 16
+10.0.0.19 - - [14/Jun/2026:08:05:44 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 18
+10.0.0.19 - - [14/Jun/2026:08:05:45 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 17
+10.0.0.19 - - [14/Jun/2026:08:05:45 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 20
+10.0.0.19 - - [14/Jun/2026:08:05:46 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 17
+10.0.0.19 - - [14/Jun/2026:08:05:46 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 18
+10.0.0.19 - - [14/Jun/2026:08:05:47 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 16
+10.0.0.19 - - [14/Jun/2026:08:05:47 +0000] "POST /api/v1/login HTTP/1.1" 401 89 "-" "python-requests/2.28" 19
+10.0.0.21 - henry [14/Jun/2026:08:06:03 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 131
+192.168.1.14 - - [14/Jun/2026:08:06:04 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 10
+10.0.0.23 - ivan [14/Jun/2026:08:06:28 +0000] "GET /api/v1/users/42 HTTP/1.1" 200 1203 "-" "Mozilla/5.0" 45
+10.0.0.25 - judy [14/Jun/2026:08:07:01 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 93
+10.0.0.27 - kevin [14/Jun/2026:08:07:14 +0000] "POST /api/v1/products HTTP/1.1" 201 450 "-" "Mozilla/5.0" 68
+10.0.0.7 - bob [14/Jun/2026:08:07:55 +0000] "GET /api/v1/analytics/weekly HTTP/1.1" 200 203401 "-" "Mozilla/5.0" 9914
+10.0.0.7 - bob [14/Jun/2026:08:07:57 +0000] "GET /api/v1/analytics/monthly HTTP/1.1" 200 418022 "-" "Mozilla/5.0" 10203
+10.0.0.9 - carol [14/Jun/2026:08:07:59 +0000] "GET /api/v1/analytics/quarterly HTTP/1.1" 200 512300 "-" "Mozilla/5.0" 11887
+192.168.1.16 - - [14/Jun/2026:08:08:02 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 10
+10.0.0.29 - lena [14/Jun/2026:08:08:23 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 81
+10.0.0.31 - mike [14/Jun/2026:08:08:45 +0000] "PUT /api/v1/products/77 HTTP/1.1" 200 320 "-" "Mozilla/5.0" 57
+10.0.0.33 - nina [14/Jun/2026:08:09:01 +0000] "DELETE /api/v1/orders/901 HTTP/1.1" 204 0 "-" "Mozilla/5.0" 52
+10.0.0.35 - omar [14/Jun/2026:08:09:22 +0000] "GET /api/v1/reports/2026-03 HTTP/1.1" 200 91200 "-" "Mozilla/5.0" 88
+192.168.1.10 - - [14/Jun/2026:08:10:01 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.37 - petra [14/Jun/2026:08:10:14 +0000] "POST /api/v1/login HTTP/1.1" 200 256 "-" "curl/7.79" 39
+10.0.0.39 - quinn [14/Jun/2026:08:10:33 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 128
+10.0.0.41 - ray [14/Jun/2026:08:10:55 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 91
+10.0.0.43 - sue [14/Jun/2026:08:11:08 +0000] "POST /api/v1/orders HTTP/1.1" 201 880 "-" "Mozilla/5.0" 72
+192.168.1.12 - - [14/Jun/2026:08:11:02 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.45 - tom [14/Jun/2026:08:11:31 +0000] "GET /api/v1/users/88 HTTP/1.1" 200 1198 "-" "Mozilla/5.0" 43
+10.0.0.47 - uma [14/Jun/2026:08:11:50 +0000] "PUT /api/v1/orders/334 HTTP/1.1" 200 335 "-" "Mozilla/5.0" 60
+10.0.0.49 - vera [14/Jun/2026:08:12:01 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 133
+10.0.0.51 - will [14/Jun/2026:08:12:24 +0000] "GET /api/v1/analytics/daily HTTP/1.1" 200 97830 "-" "Mozilla/5.0" 89
+192.168.1.14 - - [14/Jun/2026:08:12:03 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 10
+10.0.0.53 - xena [14/Jun/2026:08:12:45 +0000] "DELETE /api/v1/users/22 HTTP/1.1" 204 0 "-" "Mozilla/5.0" 58
+10.0.0.55 - yara [14/Jun/2026:08:12:59 +0000] "POST /api/v1/products HTTP/1.1" 201 440 "-" "Mozilla/5.0" 67
+10.0.0.57 - zach [14/Jun/2026:08:13:14 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 86
+192.168.1.16 - - [14/Jun/2026:08:13:02 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.5 - alice [14/Jun/2026:08:13:30 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 82
+10.0.0.7 - bob [14/Jun/2026:08:13:48 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 136
+10.0.0.9 - carol [14/Jun/2026:08:14:02 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 89
+10.0.0.11 - dave [14/Jun/2026:08:14:19 +0000] "POST /api/v1/login HTTP/1.1" 200 256 "-" "curl/7.79" 41
+10.0.0.13 - eve [14/Jun/2026:08:14:35 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 80
+192.168.1.10 - - [14/Jun/2026:08:14:03 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 12
+10.0.0.15 - frank [14/Jun/2026:08:14:51 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 130
+10.0.0.17 - grace [14/Jun/2026:08:15:07 +0000] "PUT /api/v1/orders/553 HTTP/1.1" 200 340 "-" "Mozilla/5.0" 59
+10.0.0.21 - henry [14/Jun/2026:08:15:22 +0000] "GET /api/v1/reports/2026-02 HTTP/1.1" 200 89012 "-" "Mozilla/5.0" 91
+10.0.0.23 - ivan [14/Jun/2026:08:15:39 +0000] "DELETE /api/v1/products/55 HTTP/1.1" 204 0 "-" "Mozilla/5.0" 54
+192.168.1.12 - - [14/Jun/2026:08:15:04 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 10
+10.0.0.25 - judy [14/Jun/2026:08:15:58 +0000] "POST /api/v1/orders HTTP/1.1" 201 880 "-" "Mozilla/5.0" 71
+10.0.0.27 - kevin [14/Jun/2026:08:16:11 +0000] "GET /api/v1/users HTTP/1.1" 200 4321 "-" "Mozilla/5.0" 83
+10.0.0.29 - lena [14/Jun/2026:08:16:28 +0000] "GET /api/v1/products HTTP/1.1" 200 12034 "-" "Mozilla/5.0" 141
+10.0.0.31 - mike [14/Jun/2026:08:16:45 +0000] "GET /api/v1/orders HTTP/1.1" 200 8901 "-" "Mozilla/5.0" 94
+192.168.1.14 - - [14/Jun/2026:08:16:04 +0000] "GET /api/health HTTP/1.1" 200 512 "-" "kube-probe/1.27" 11
+10.0.0.33 - nina [14/Jun/2026:08:17:01 +0000] "POST /api/v1/login HTTP/1.1" 200 256 "-" "curl/7.79" 40
+10.0.0.35 - omar [14/Jun/2026:08:17:18 +0000] "GET /api/v1/analytics/daily HTTP/1.1" 200 97830 "-" "Mozilla/5.0" 87
+--- END LOG ---

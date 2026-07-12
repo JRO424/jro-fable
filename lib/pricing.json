@@ -1,0 +1,152 @@
+{
+  "$schema": "claude-pricing-v1",
+  "_comment": "Per-MTok prices in USD for Anthropic Claude models. SOURCE OF TRUTH for /jro-fable. Refresh by running lib/pricing-check.sh — it scrapes claude.com/pricing and reports drift, but does NOT auto-update (humans verify before edits). Last verified manually against the price list known to /jro-fable's SKILL.md.",
+  "last_verified": "2026-07-02",
+  "verified_by": "claude (skill-audit 26-0702, official platform.claude.com docs)",
+  "source_url": "https://claude.com/pricing",
+  "models": {
+    "claude-fable-5": {
+      "display": "Fable 5",
+      "available": true,
+      "input_per_mtok_usd": 10.0,
+      "output_per_mtok_usd": 50.0,
+      "cache_read_per_mtok_usd": 1.0,
+      "cache_write_per_mtok_usd": 12.5,
+      "vs_fable_input": 1.0,
+      "vs_fable_output": 1.0,
+      "context_window": "1M",
+      "max_output": "128K",
+      "notes": "GA again 2026-07-01 (redeployed after June suspension). Adaptive thinking ALWAYS on (omit thinking param; depth via output_config.effort low|high|xhigh|max). No prefill, no sampling params, raw CoT never returned. Safety classifiers can return stop_reason:refusal — configure server-side fallback to claude-opus-4-8 (beta server-side-fallback-2026-06-01) for unattended runs. Own (smaller) rate-limit pool vs Opus. Requires 30-day data retention (ZDR orgs get 400). Reserve for frontier judgment: hardest long-horizon agentic work, highest-stakes synthesis."
+    },
+    "claude-opus-4-8-fast": {
+      "display": "Opus 4.8 (fast mode)",
+      "available": true,
+      "input_per_mtok_usd": 10.0,
+      "output_per_mtok_usd": 50.0,
+      "vs_fable_input": 1.0,
+      "vs_fable_output": 1.0,
+      "notes": "Same Opus 4.8 model at up to 2.5x output speed (/fast in Claude Code, >=v2.1.36). 2x standard Opus price; on Pro/Max it bills usage CREDITS only, never plan-included usage. Enable at session start (mid-session toggle re-pays full uncached input once). For interactive latency-bound Opus-grade work only — never long autonomous runs, batch, or CI. Opus 4.7 fast mode is removed 2026-07-24."
+    },
+    "claude-opus-4-8": {
+      "display": "Opus 4.8",
+      "input_per_mtok_usd": 5.0,
+      "output_per_mtok_usd": 25.0,
+      "cache_read_per_mtok_usd": 0.5,
+      "cache_write_per_mtok_usd": 6.25,
+      "vs_fable_input": 0.5,
+      "vs_fable_output": 0.5,
+      "notes": "2x cheaper than Fable. Strong on complex reasoning."
+    },
+    "claude-sonnet-5": {
+      "display": "Sonnet 5",
+      "available": true,
+      "input_per_mtok_usd": 3.0,
+      "output_per_mtok_usd": 15.0,
+      "intro_pricing": "2.00 in / 10.00 out per MTok through 2026-08-31",
+      "cache_read_per_mtok_usd": 0.3,
+      "cache_write_per_mtok_usd": 3.75,
+      "vs_fable_input": 0.3,
+      "vs_fable_output": 0.3,
+      "context_window": "1M",
+      "max_output": "128K",
+      "notes": "EXECUTION seat since 26-0702. Near-Opus coding at 3-5x less cost (intro pricing ~5x). Adaptive thinking ON by default when thinking param omitted. Own rate-limit pool (separate from Sonnet 4.x). Fast latency-class already — prefer over fast-Opus when the task does not need Opus judgment."
+    },
+    "claude-sonnet-4-6": {
+      "display": "Sonnet 4.6 (legacy, still active)",
+      "input_per_mtok_usd": 3.0,
+      "output_per_mtok_usd": 15.0,
+      "cache_read_per_mtok_usd": 0.3,
+      "cache_write_per_mtok_usd": 3.75,
+      "vs_fable_input": 0.3,
+      "vs_fable_output": 0.3,
+      "notes": "Superseded by Sonnet 5 for the EXECUTION seat 26-0702 (same list price, Sonnet 5 has intro discount + adaptive thinking). Active until at least 2027-02-17. Shares a rate pool with Sonnet 4.5."
+    },
+    "claude-haiku-4-5-20251001": {
+      "display": "Haiku 4.5",
+      "input_per_mtok_usd": 1.0,
+      "output_per_mtok_usd": 5.0,
+      "cache_read_per_mtok_usd": 0.1,
+      "cache_write_per_mtok_usd": 1.25,
+      "vs_fable_input": 0.1,
+      "vs_fable_output": 0.1,
+      "notes": "10x cheaper than Fable. For pattern matching, log scanning, bulk inventory. Break-even only if error rate stays <20%."
+    },
+    "qwen3:8b": {
+      "display": "qwen3:8b (local)",
+      "available": true,
+      "input_per_mtok_usd": 0,
+      "output_per_mtok_usd": 0,
+      "vs_fable_input": 0,
+      "vs_fable_output": 0,
+      "notes": "Local via ~/bin/loc fast. Sub-3s on M5 Max. Bulk extraction, classification, grep-tier. The LOCAL tier floor."
+    },
+    "qwen3:30b": {
+      "display": "qwen3:30b (local)",
+      "available": true,
+      "input_per_mtok_usd": 0,
+      "output_per_mtok_usd": 0,
+      "vs_fable_input": 0,
+      "vs_fable_output": 0,
+      "notes": "Local via ~/bin/loc (general). 5-15s on M5 Max. Default local worker."
+    },
+    "qwen3:32b": {
+      "display": "qwen3:32b (local)",
+      "available": true,
+      "input_per_mtok_usd": 0,
+      "output_per_mtok_usd": 0,
+      "vs_fable_input": 0,
+      "vs_fable_output": 0,
+      "notes": "Local via ~/bin/loc big | lens | lingua. Editorial reviewer + bilingual parity. 10-30s on M5 Max."
+    },
+    "qwen3-coder:30b": {
+      "display": "qwen3-coder:30b (local)",
+      "available": true,
+      "input_per_mtok_usd": 0,
+      "output_per_mtok_usd": 0,
+      "vs_fable_input": 0,
+      "vs_fable_output": 0,
+      "notes": "Local via ~/bin/loc code | cr. First-pass code review before /harden or Sonnet."
+    },
+    "nomic-embed-text": {
+      "display": "nomic-embed-text (local)",
+      "available": true,
+      "input_per_mtok_usd": 0,
+      "output_per_mtok_usd": 0,
+      "vs_fable_input": 0,
+      "vs_fable_output": 0,
+      "notes": "Local via ~/bin/loc embed. 768-dim vectors for semantic recall. Free, instant."
+    }
+  },
+  "tiers": {
+    "_comment": "Canonical tier->model binding for /jro-fable. JUDGMENT auto-binds to the first AVAILABLE model in `prefer`; Fable 5 redeployed 2026-07-01 so the apex seat now holds Fable 5. Cost discipline: on subscription Claude Code the main loop is already Fable 5 (no marginal cost — use it for judgment, delegate down). On METERED API, default judgment to Opus 4.8 and escalate to Fable 5 only when frontier-hard (2x price, smaller rate pool, refusal-fallback needed). LOCAL tier added 260620 — free, on-machine on Jon's M5 Max via ~/bin/loc / lens / cr / lingua.",
+    "judgment": {
+      "prefer": ["claude-fable-5", "claude-opus-4-8"],
+      "current": "claude-fable-5",
+      "api_metered_default": "claude-opus-4-8",
+      "escalate_to_frontier_when": "long-horizon agentic, hardest synthesis, conflict resolution where Opus disagrees with itself"
+    },
+    "execution": {
+      "prefer": ["claude-sonnet-5", "claude-sonnet-4-6"],
+      "current": "claude-sonnet-5"
+    },
+    "mechanical": {
+      "prefer": ["claude-haiku-4-5-20251001"],
+      "current": "claude-haiku-4-5-20251001"
+    },
+    "local": {
+      "prefer": ["qwen3:32b", "qwen3:30b", "qwen3-coder:30b", "qwen3:8b"],
+      "current": "qwen3:30b",
+      "cli": "~/bin/loc",
+      "cost_per_mtok_usd": 0,
+      "notes": "On-machine via Ollama. Sub-Haiku latency, $0, unlimited, offline. Try-first for bulk-verifiable work."
+    }
+  },
+  "rules": {
+    "delegation_break_even_tokens": 2000,
+    "haiku_break_even_error_rate": 0.2,
+    "cache_discount_after_first_call": 0.1,
+    "effort_default": "high",
+    "effort_routing": "Effort (low|high|xhigh|max) is the intra-model knob on the Claude 5 family + Opus 4.7+. Downshift EFFORT before downshifting MODEL on judgment work: Fable 5 at low effort often exceeds prior models at max. Workers doing mechanical stages get effort low; hardest verify/judge stages get xhigh. Higher effort up front often reduces total agentic cost via fewer turns.",
+    "cache_rule": "Cached reads do not count toward ITPM. Keep a route on ONE model with a stable prefix; spawn cheaper-model SUBAGENTS instead of switching models mid-session (switching invalidates cache)."
+  }
+}

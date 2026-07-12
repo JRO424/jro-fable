@@ -1,0 +1,21 @@
+task_id: extract-fields
+task_type: extract
+expected_shape: valid JSON array with exactly 6 objects; each object has keys company, role, start_date, end_date, location; no extra keys; dates in YYYY-MM format or null if not stated; no markdown fences in the output
+
+Extract structured data from each of the 6 bio sentences below. Return a JSON array with exactly 6 objects. Each object must have these keys and no others:
+  company      — employer name
+  role         — job title
+  start_date   — start month as "YYYY-MM", or null if not stated
+  end_date     — end month as "YYYY-MM", or "present" if current, or null if not stated
+  location     — city/country, or null if not stated
+
+Return ONLY the raw JSON array. No markdown fences, no explanation, no extra text.
+
+--- BIOS ---
+1. Maria Chen joined Stripe as a Senior Product Manager in March 2021 and continues in that role today, working out of the San Francisco office.
+2. After leaving Google's London office in December 2019, James Okafor spent two years as a Staff Engineer at Monzo before moving on.
+3. Priya Nair served as Director of Data Science at Unilever Singapore from July 2018 through January 2022.
+4. Carlos Reyes is a freelance UX Designer based in Mexico City; he has been independent since 2020 with no single employer.
+5. From January 2023 to present, Aisha Thornton has held the title of VP of Engineering at Anthropic in San Francisco.
+6. Hiroshi Tanaka worked briefly as a Machine Learning Engineer at Toyota in Nagoya, starting in April 2017 and finishing in September 2017.
+--- END BIOS ---
